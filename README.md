@@ -142,7 +142,7 @@ v1.1.4
 
 A Python3 based Bot. currently supports deployment on vps as a Docker.
 
-[! [Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=666wcy&repo=ARPT-Bot)](https://github.com/666wcy/ARPT-Bot)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=666wcy&repo=ARPT-Bot)](https://github.com/666wcy/ARPT-Bot)
 
 Main features:
 
@@ -170,7 +170,7 @@ Main features:
   - [X] rclone official lsd, lsf method adaptation
   - [X] rclone copy adaptation, i.e., dual-disk transfer, support for viewing transfer progress
   - [X] rclone copyurl method to upload files, real-time progress display
-  - [ X ] support for aria2 panel class tool rpc connection (get, post method)
+  - [X] support for aria2 panel class tool rpc connection (get, post method)
   - [ ] TG button view rclone directory
   - [ ] Name the current directory file as emby scan format
   - [ ] add rclone configuration, clear rclone configuration via Bot
@@ -210,7 +210,7 @@ Main features:
 
 # Bot Commands
 
-通过在 **@BotFather** 设置命令
+Set the commands below in **@BotFather**
 
 <!-- TODO: reword some of the commands below -->
 
@@ -247,7 +247,7 @@ nhentaisearch - Search for books in nhentai, support ZIP upload to disk and send
 
 # Installation
 
-Docker 部署命令：
+Docker Deployment Command：
 
 ~~评论区反馈docker不支持arm架构，推测原因为原docker为amd64架构,目前只在amd64上测试成功~~
 目前理论支持所含架构，具体没有进行真机测试
