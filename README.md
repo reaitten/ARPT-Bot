@@ -6,27 +6,28 @@
 
 [![GitHub Stars](https://img.shields.io/github/stars/666wcy/ARPT-Bot.svg?color=inactived&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/linuxserver/docker-qbittorrent) [![Docker Pulls](https://img.shields.io/docker/pulls/benchao/arpt.svg?color=inactived&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/repository/docker/benchao/arpt) [![GitHub Release](https://img.shields.io/docker/v/benchao/arpt?color=inactived&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=最新版本&logo=docker)](https://github.com/linuxserver/docker-qbittorrent/releases)
 
-# 更新说明
+# Changelog
 
-v2.0.9
+v2.0.9 (current)
 
-修改rclone调用方式，改为rc http api调用。
+Modify the rclone call to rc http api call.
 
-新增对[RcloneNg](https://github.com/ElonH/RcloneNg)的支持。
+Added support for [RcloneNg](https://github.com/ElonH/RcloneNg).
 
-映射rclone rc，支持自定义对rclone rc进行操作,具体操作可参考[rclone rc教程](https://rclone.org/rc/)
+Mapping `rclone rc`, support for customizing the operation of `rclone rc`, the specific operation can be referred to [rclone rc tutorial](https://rclone.org/rc/).
 
 ***
-此版本后支持自动更新，Python文件的变动只需重启即可更新，其它硬性更新才会通过docker更新版本
+Automatic update is supported after this version, Python file changes can be updated by simply rebooting, other hard updates will only update the version via Docker
 
-修复aria2面板添加的任务与conf文件的配置冲突导致本地文件被删除 [#18](https://github.com/666wcy/ARPT-Bot/issues/18)[#16](https://github.com/666wcy/ARPT-Bot/issues/16)
+Fix conflict between tasks added by aria2 panel and configuration of `conf` file causing local files to be deleted [#18](https://github.com/666wcy/ARPT-Bot/issues/18)[#16](https://github.com/666wcy/ARPT-Bot/) issues/16)
 
-修复odprivate命令失效(与后续指令冲突导致失效) [#17](https://github.com/666wcy/ARPT-Bot/issues/17)
+Fix odprivate command failure (conflict with subsequent command causes failure) [#17](https://github.com/666wcy/ARPT-Bot/issues/17)
 
-修复默认面板账号密码为默认，存在安全隐患，修改为账号：`admin`，密码:你设置的`Aria2_secret`的值
+Fix the default panel account password as default, which is a security risk, change it to account:`admin`, password:the value of `Aria2_secret` you set
 
 <details>
-<summary>历史记录</summary>
+
+<summary>Previous changelog</summary>
 
 v2.0.8
 
@@ -137,113 +138,114 @@ v1.1.4
 </details>
 
 
-# 介绍
+# Introduction
 
-一个基于Python3的Bot。目前支持以Docker的方式部署在vps上。
+A Python3 based Bot. currently supports deployment on vps as a Docker.
 
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=666wcy&repo=ARPT-Bot)](https://github.com/666wcy/ARPT-Bot)
+[! [Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=666wcy&repo=ARPT-Bot)](https://github.com/666wcy/ARPT-Bot)
 
-主要功能:
+Main features:
 
-- [X] 文件管理
-  - [X] 修改主界面为 [filebrowser](https://github.com/filebrowser/filebrowser)，账号为**admin**，密码为你设定的`Aria2_secret`,主界面路径：http://ip:port,请自行修改密码
+- [X] File management
+  - [X] Modify the main interface to [filebrowser](https://github.com/filebrowser/filebrowser), the account is **admin**, the password is `Aria2_secret` that you set, the path to the main interface: http://ip:port,请自行修改 Password
 
-- [X] 网页面板
-  - [X] 支持 [AriaNg](https://github.com/mayswind/AriaNg) 面板,地址为：https://ip:port/ng/
-  - [X] 用**Nginx**为内部端口反代，替换原来的的Python Flask，更加轻量
-- [X] 支持[RcloneNg](https://github.com/ElonH/RcloneNg)，登录时地址为`http://ip:port`,请自行修改`ip`和`port`，用户名为root,密码为你设定的`Aria2_secret`
-
+- [X] Web Panel
+  - [X] Support [AriaNg](https://github.com/mayswind/AriaNg) panel at https://ip:port/ng/
+  - [X] Use **Nginx** for internal port inverse generation, replacing the original Python Flask, more lightweight
+- [X] Support [RcloneNg](https://github.com/ElonH/RcloneNg), login at `http://ip:port`, please change `ip` and `port` by yourself, username is root, password is `Aria2_secret` that you set
 
 - [X] Aria2
-  - [X] 自动化安装Aria2，自定义密钥
-  - [X] 用Bot进行简单的Aria2端控制(添加任务、暂停任务、删除任务)
-  - [X] 支持批量添加任务
-  - [X] 显示下载进度
-  - [X] 任务完成后通过rclone上传(**显示上传进度**)，最新版rclone已支持世纪互联
-  - [X] 支持aria2面板类工具rpc连接(get、post方式)
-  - [X] 支持自动上传面板类工具rpc连接添加的任务自动上传(不显示进度)。通过面板添加的任务上传方式更改为P大的上传脚本，保持原有路径。
-  - [X] 采用P大的配置，自动添加tracker。
-  - [X] 下载OneDrive、sharepoint公开分享链接中的文件，保持文件路径推送到Aria2.已实现。采用项目地址：[OneDriveShareLinkPushAria2](https://github.com/gaowanliang/OneDriveShareLinkPushAria2)
-  - [ ] Rss自动下载，已有成品，尚未对接
+  - [X] Automated Aria2 installation with custom keys
+  - [X] Simple Aria2 side control with Bot (add tasks, pause tasks, delete tasks)
+  - [X] Support for adding tasks in batches
+  - [X] Show download progress
+  - [X] Upload via rclone after task completion (**display upload progress**), the latest version of rclone already supports CenturyLink
+  - [X] Support rpc connection for aria2 panel-like tools (get, post)
+  - [X] Support automatic uploading of tasks added by panel-like tool rpc connection automatically (without displaying progress). The upload method of tasks added via panel is changed to PU's upload script, keeping the original path.
+  - [X] Use PU's configuration to add tracker automatically.
+  - [X] Download files from OneDrive, sharepoint public share links, keep the file path pushed to Aria2. Implemented. Using the project address: [OneDriveShareLinkPushAria2](https://github.com/gaowanliang/OneDriveShareLinkPushAria2)
+  - [ ] Rss automatic download, already finished, not yet docked
 
 - [X] Rclone
-  - [X] rclone官方lsd，lsf方法的适配
-  - [X] rclone copy的适配，即双盘互传，支持查看传输进度
-  - [X] rclone copyurl方式上传文件，实时显示进度
-  - [X] 支持aria2面板类工具rpc连接(get、post方式)
-  - [ ] TG按键式查看rclone目录
-  - [ ] 将当前目录文件命名为emby扫描格式
-  - [ ] 通过Bot添加rclone配置、清空rclone配置
-  - [ ] 获取单个或多个文件夹的分享链接(gd,od)
+  - [X] rclone official lsd, lsf method adaptation
+  - [X] rclone copy adaptation, i.e., dual-disk transfer, support for viewing transfer progress
+  - [X] rclone copyurl method to upload files, real-time progress display
+  - [ X ] support for aria2 panel class tool rpc connection (get, post method)
+  - [ ] TG button view rclone directory
+  - [ ] Name the current directory file as emby scan format
+  - [ ] add rclone configuration, clear rclone configuration via Bot
+  - [ ] Get share links for single or multiple folders (gd,od)
   
 - [X] Pixiv
-  - [X] 根据pid获取图片
-  - [X] 下载画师的全部作品，支持打包上传网盘、打包发送tg、图片方式发送tg、telegraph(网页)方式发送图片。打包格式为zip。
-  - [X] 下载日榜，周榜、月榜，支持打包上传网盘、打包发送tg、图片方式发送tg、telegraph(网页)方式发送图片。打包格式为zip。
-  - [X] 支持指定日期的榜单下载
+  - [X] Get pictures according to PID
+  - [X] Download all the works of the artist, support package to upload netdisk, package to send tg, image way to send tg, telegraph (web) way to send images. Archive format is zip.
+  - [X] Download daily, weekly and monthly charts, support package uploading, package sending tg, image sending tg, telegraph (web) sending. Archive format is zip.
+  - [X] Support downloading the list of specified date
 
-- [X] 影音相关
-  - [X] 使用YouTube-dl下载视频，支持上传网盘或发送到tg。默认最高画质，目前完美适配YouTube和哔哩哔哩(不含番剧)
-  - [X] 网易云音乐下载，支持id下载，搜索下载，整个歌单下载，支持发送到tg和上传网盘
-  - [X] 新增将视频转为MP3格式发送、上传
-  - [ ] 视频与字幕混流
-  - [ ] 常用影音格式格式互转
+- [X] Audio and video related
+  - [X] Download videos with YouTube dl, support uploading to netbook or sending to tg. highest quality by default, currently perfect for YouTube & 和哔哩哔哩 [(Bilibili)](https://www.bilibili.com/)
+  - [X] Download YouTube music, support id download, search download, whole song list download, support send to tg and upload to netdisk
+  - [X] Add video to MP3 format for sending and uploading
+  - [ ] Video and subtitle mixing
+  - [ ] Convert common video and audio formats to each other
 
 - [X] Telegram
-  - [X] 只有当前用户的命令生效
-  - [X] 发送file id获取文件
-  - [X] 发送文件获取file id
-  - [X] 发送TG文件上传到网盘
-  - [X] 支持命令查看Bot运行时间和剩余空间
-  - [X] 支持群组内使用。Ps:已有群组版本，正在考虑如何混合适配
-  - [ ] 添加Bot白名单
+  - [X] Only the current user's commands take effect
+  - [X] Send file id to get file
+  - [X] Send file to get file id
+  - [X] Send TG file to upload to network drive
+  - [X] Support command to view Bot runtime and remaining space
+  - [X] Support group use. PS: group version available, considering how to mix and match
+  - [ ] Add Bot whitelist
 
-- [X] 图片相关
-  - [X] 合并[搜图机器人](https://github.com/666wcy/search_photo-telegram-bot-heroku)，支持[saucenao](https://saucenao.com/)、[WhatAnime](https://trace.moe/)、[ascii2d](https://ascii2d.net/)、[iqdb](http://www.iqdb.org/)
-  - [X] 搜索下载哔咔的本子，支持ZIP文件格式发送到TG和上传网盘
-  - [X] 对接 [nhentai](https://github.com/RicterZ/nhentai),下载nhentai本子并支持以ZIP文件格式发送TG、ZIP格式上传网盘、网页格式发送到TG
-  - [X] 本子的搜索，支持哔咔、ehentai、nhentai
-  - [X] saucenao搜图支持快捷搜索
+- [X] Image related
+  - [X] Merge [Searchbot](https://github.com/666wcy/search_photo-telegram-bot-heroku), support [saucenao](https://saucenao.com/), [WhatAnime](https:// trace.moe/), [ascii2d](https://ascii2d.net/), and [iqdb](http://www.iqdb.org/).
+  - [X] Search and download beeping books, support for .zip archive format to send to .zip archive format and upload to netbook
+  - [X] Docking [nhentai](https://github.com/RicterZ/nhentai), download nhentai book and support sending Telegram in .zip archive format, uploading netdisk in .zip archive format, sending Telegram in web format
+  - [X] 本子的搜索, 支持哔咔, ehentai, nhentai
+  - [X] saucenao search map support quick search
 
  
 
 
-# Bot command
+# Bot Commands
 
 通过在 **@BotFather** 设置命令
 
+<!-- TODO: reword some of the commands below -->
+
 ```
-start - 查看Bot状态
-help - 获取Bot的使用帮助
-pixivauthor - 对pixiv画师作品操作
-pixivtopall - 对pixiv排行榜进行操作
-pixivtopillust - 对插画排行榜进行操作
-pixivpid - 发送pixiv该id的图片
-magfile - 推送种子文件至aria2下载后上传至网盘
-mirror - 推送直链至aria2下载上传至网盘
-mirrortg - 推送直链至aria2下载发送到TG
-magnet - 推送磁力链接至aria2下载后上传至网盘
-downtgfile - 发送TG文件并上传至网盘
-rclonecopy - 用rclone在网盘间传输
-rclonelsd - 用rclone显示网盘文件夹
-rclone - 用rclone显示文件夹内详细信息
-rclonecopyurl - 用rclonecopyurl的方式直接上传直链文件
-getfileid - 发送文件获取fileid
-getfile - 发送fileid来获取文件
-video - 发送视频链接
-neteaseid - 通过id获取歌曲信息
-searchsong - 搜索网易云音乐歌曲
-playlist - 获取歌单信息
-odshare - 下载公开的od、sp分享链接文件并上传网盘
-odprivate - 下载域内的od、sp分享链接上传到网盘
-nhentai - 下载nhentai中对应id的本子
-ehentai - 下载nhentai中对应id的本子
-picacgsearch - 在哔咔中搜索本子，支持ZIP上传到网盘和发送到TG
-ehentaisearch - 在ehentai中搜索本子，支持ZIP上传到网盘和发送到TG、发送网页
-nhentaisearch - 在nhentai中搜索本子，支持ZIP上传到网盘和发送到TG、发送网页
+start - Check the status of the Bot
+help - Get help on using the Bot
+pixivauthor - operate on pixiv artists' works
+pixivtopall - operate on pixiv leaderboards
+pixivtopillust - operate on the illustration leaderboard
+pixivpid - send pixiv images with that id
+magfile - send seeds to aria2 for downloading and uploading
+mirror - send a direct link to aria2 to download and upload to the web site
+mirrortg - Push direct link to aria2 to download and send to Telegram
+magnet - push magnet link to aria2 for download and upload to netdisk
+downtgfile - Send Telegram file and upload to netdisk
+rclonecopy - use rclone to transfer between disks
+rclonelsd - Show network folders with rclone
+rclone - Show details in a folder with rclone
+rclonecopyurl - Upload direct link files with rclonecopyurl
+getfileid - send a file to get the fileid
+getfile - send a fileid to get a file
+video - send a link to a video
+neteaseid - Get song information by id
+searchsong - Search for Netease songs
+playlist - Get song list information
+odshare - download public od, sp share link files and upload to netease
+odprivate - Download odshare links from within the domain and upload them to NetDisk
+nhentai - Download the book with the corresponding id in nhentai
+ehentai - Download the book with the corresponding id in nhentai
+picacgsearch - Search the book in beep, support ZIP upload to netbook and send to Telegram
+ehentaisearch - Search for books in ehentai, support ZIP upload to disk and send to Telegram, send to web
+nhentaisearch - Search for books in nhentai, support ZIP upload to disk and send to Telegram, send web page
 ```
 
-# 安装
+# Installation
 
 Docker 部署命令：
 
@@ -267,7 +269,7 @@ docker run -d \
 
 ```
 
-配置解释
+Configuration explanation
 
 ```
 Api_hash Api_id 这两项在https://my.telegram.org中注册应用后得到
@@ -288,27 +290,27 @@ Error_user_info 可不填，可设置非允许使用者发送消息时的提示�
 
 ```
 
-在Docker运行后访问ip:port访问文件管理器，~~在/.config/rclone下文件夹新建rclone.conf,粘贴自己的rclone配置。~~
-PS:有人反馈此处配置不成功，可尝试在/root/.config/rclone也添加配置，bot运行 **/rclone 盘符:** ，可以查看是否成功
-关于上传方法，将.conf文件拖入浏览器即可。
+After Docker is running, visit ip:port to access the file manager, ~~create a new rclone.conf in the folder under /.config/rclone, and paste your own rclone configuration.~~
+PS: Some people reported that the configuration here is not successful, you can try to add the configuration in the directory `/root/.config/rclone`, bot run **/rclone disk:**, you can check whether it is successful
+About the upload method, just drag the .conf file into the browser.
 
-![成功效果](https://cdn.jsdelivr.net/gh/666wcy/img_share@main/img/image.2abs656qyrb4.png)
+![Example of Successful Setup](https://cdn.jsdelivr.net/gh/666wcy/img_share@main/img/image.2abs656qyrb4.png)
 
-Docker目前不支持自动更新，目前更新需要自行重装新镜像版本
+Docker currently does not support automatic updates, currently updates need to reinstall the new image version by themselves
 
-可自行查看最新镜像版本号：[查看地址](https://hub.docker.com/repository/docker/benchao/arpt)
+You can check the latest mirror version number by yourself: [View Address](https://hub.docker.com/repository/docker/benchao/arpt)
 
-# 杂项说明
+# Miscellaneous notes
 
-关于在面板配置Aria2的设置，ip为vps端口，端口为docker设定的端口
-举例,若docker中命令为
+About the configuration of Aria2 in the panel, ip is the vps port, port is the port set by docker
+For example, if the command in docker is
 `-p 8868:8868 \`
-则端口为8868
-面板密钥填docker创建时你的Aria2_secret值
+then the port is 8868
+The panel key is the value of your Aria2_secret when docker was created
 
 
 
-# 效果展示
+# Bot Demonstrations 
 
 ![](https://cdn.jsdelivr.net/gh/666wcy/img_share@main/img/bot下载种子.501pcym934k0.png)
 
@@ -323,7 +325,7 @@ Docker目前不支持自动更新，目前更新需要自行重装新镜像版�
 ![](https://cdn.jsdelivr.net/gh/666wcy/img_share@main/img/image.771n1tka9dg0.png)
 
 
-# 感谢下面大佬的贡献
+# Thanks for the contributions of the following
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=ytdl-org&repo=youtube-dl)](https://github.com/ytdl-org/youtube-dl)
 
