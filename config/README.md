@@ -1,262 +1,262 @@
-# Aria2 完美配置
+# Aria2 Perfect Configuration
 
 [![LICENSE](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square&label=LICENSE)](https://github.com/P3TERX/aria2_perfect_config/blob/master/LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/P3TERX/aria2_perfect_config.svg?style=flat-square&label=Stars&logo=github)](https://github.com/P3TERX/aria2_perfect_config/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/P3TERX/aria2_perfect_config.svg?style=flat-square&label=Forks&logo=github)](https://github.com/P3TERX/aria2_perfect_config/fork)
 
-本项目是一套 Aria2 配置方案，包含了配置文件、附加功能脚本等文件，用于实现 Aria2 功能的增强和扩展，提升 Aria2 的下载速度与使用体验，解决 Aria2 在使用中遇到的 BT 下载无速度、文件残留占用磁盘空间、任务丢失、重复下载等问题。
+This project is a set of Aria2 configuration scheme, including configuration files, additional function scripts and other files, used to achieve the enhancement and expansion of Aria2 features, improve the download speed and experience of Aria2, solve the problems encountered in the use of Aria2 BT download speed, file residuals occupy disk space, task loss, repeated downloads and other problems.
 
-## 功能特性
+## Features
 
-* BT 下载率高、速度快
-* 重启后不丢失任务进度、不重复下载
-* 下载错误或取消下载自动删除未完成的文件防止磁盘空间占用
-* 下载完成自动清除`.aria2`后缀名文件
-* 一键获取 BT tracker，进一步提升 BT 下载速度
-* 更好的 PT 下载支持
-* 有一定的防版权投诉、防迅雷吸血效果
-* 联动 RCLONE 自动上传到 Google Drive 和 OneDrive 等网盘
+* High BT download rate and fast speed
+* No loss of task progress after restart, no duplicate downloads
+* Download error or cancel download automatically delete unfinished files to prevent disk space occupation
+* Auto-clean `.aria2` suffix file when download is finished
+* Get BT tracker with one click to further improve BT download speed
+* Better PT download support
+* Certain anti-copyright complaints and anti-Xunlei blood-sucking effects
+* Automatic uploading to Google Drive and OneDrive by linking RCLONE
 
-## 部署方案
+## Deployment options
 
-**推荐使用以下项目部署以获得最佳使用体验**
+**Recommended to deploy with the following projects for the best experience**
 
 - [Aria2 Pro](https://github.com/P3TERX/docker-aria2-pro) (Docker)
 
-- [Aria2 一键安装管理脚本 增强版](https://github.com/P3TERX/aria2.sh) (GNU/Linux)
+- [Aria2 One-Click Installation and Management Script Enhanced](https://github.com/P3TERX/aria2.sh) (GNU/Linux)
 
-## 进阶玩法
+## Advanced Play
 
-* [OneDrive、Google Drive 等网盘离线下载](https://p3terx.com/archives/offline-download-of-onedrive-gdrive.html)
-* [百度网盘转存到 OneDrive 、Google Drive 等其他网盘](https://p3terx.com/archives/baidunetdisk-transfer-to-onedrive-and-google-drive.html)
+* [OneDrive, Google Drive, etc. offline download](https://p3terx.com/archives/offline-download-of-onedrive-gdrive.html)
+* [Baidu.com dump to OneDrive, Google Drive and other network drives](https://p3terx.com/archives/baidunetdisk-transfer-to-onedrive-and-google-drive.html)
 
-## 文件说明
+## File description
 
-> **TIPS:** 脚本需配合配置文件使用，仅适用于 GNU/Linux
+> **TIPS:** Script needs to be used with configuration file, only for GNU/Linux
 
-| 文件                    | 说明                                                                                                                                                                                                                                                                 |
+| File | Description |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `aria2.conf`            | Aria2 配置文件。建议使用 1.35.0 及以上版本，在不了解的情况下修改可能导致本方案的特性失效。                                                                                                                                                                           |
-| `delete.sh`             | 文件删除脚本。在下载停止后执行([on-download-stop](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-on-download-stop))，自动删除文件及 `.aria2` 后缀名文件，防止不必要的磁盘空间占用。（默认启用）                                                        |
-| `clean.sh`              | 清理脚本。在下载完成后执行([on-download-complete](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-on-download-complete))，自动清除 `.aria2` 后缀名文件。（默认启用）                                                                                    |
-| `upload.sh`             | 上传脚本。在下载完成后执行([on-download-complete](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-on-download-complete))，自动调用 RCLONE 上传(move)下载的文件到网盘，并自动清除 `.aria2` 后缀名文件与空目录。（默认不启用）                            |
-| `move.sh`               | 文件移动脚本。在下载完成后执行([on-download-complete](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-on-download-complete))，自动将下载完成的文件移动到指定目录，并自动清除 `.aria2` 后缀名文件与空目录。（默认不启用）                                |
-| `tracker.sh`            | BT tracker 列表更新脚本。在 Aria2 配置文件(`aria2.conf`)所在目录执行即可获取[最新 tracker 列表](https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt)并添加到配置文件中。此脚本还有更强大的功能，具体使用方法详见 [tracker.md](./tracker.md) |
-| `dht.dat`<br>`dht6.dat` | DHT 文件。提升 BT 下载率和下载速度的关键之一。相关科普：《[解决 Aria2 无法下载磁力链接、BT种子和速度慢的问题](https://p3terx.com/archives/solved-aria2-cant-download-magnetic-link-bt-seed-and-slow-speed.html)》                                                    |
+| `aria2.conf` | The Aria2 configuration file. Version 1.35.0 and above is recommended. Modifying without knowledge may invalidate features of this solution.                                                                                                                                                                           |
+| `delete.sh` | File deletion script. Execute ([on-download-stop](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-on-download-stop)) after downloading has stopped to automatically delete files and files with the `.aria2` suffix. prevent unnecessary disk space usage. (enabled by default)
+| `clean.sh` | Cleanup script. Execute ([on-download-complete](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-on-download-complete)) after the download is complete to automatically clean up the `.aria2` 后缀名文件。 （默认启用） |
+| `upload.sh` | Upload script. Execute ([on-download-complete](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-on-download-complete)) after the download is complete, which automatically calls RCLONE to upload ( move) the downloaded files to the network drive and automatically clear the `.aria2` suffix files with empty directories. (Not enabled by default) |
+| `move.sh` | File move script. Execute ([on-download-complete](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-on-download-complete)) after the download is complete to automatically move the downloaded files to the specified directory and automatically removes `.aria2` suffix files with empty directories. (Not enabled by default) |
+| `tracker.sh` | BT tracker list update script. Execute it in the directory where the Aria2 configuration file (`aria2.conf`) is located to get the [latest tracker list](https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt) and add it to the configuration file. This script has more powerful features, see [tracker.md](./tracker.md) |
+| `dht.dat`<br>`dht6.dat` | DHT files. One of the keys to improve BT download rate and download speed. Related Science：《[Solve the problem that Aria2 can not download magnetic links, BT seeds and slow speed](https://p3terx.com/archives/solved-aria2-cant-download-magnetic-link-bt-seed-and-slow-speed. html)》 |
 
-## 遇到问题如何处理
+## How to deal with issues
 
-遇到问题先看 [FAQ](https://p3terx.com/archives/aria2_perfect_config-faq.html) 再提问，你还可以加入 [Aria2 TG 群](https://t.me/Aria2c)和小伙伴们一起讨论。要注意提问的方式和提供有用的信息，提问前建议去学习《[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)》，这能更好的帮助你去解决问题和节约时间。诸如 “为什么不能使用？”、“那你能帮帮我吗？” 之类的问题应该没有人会知道。
+You can also join the [Aria2 TG Group](https://t.me/Aria2c) to discuss with your buddies. Be careful how you ask questions and provide useful information, before asking questions it is recommended to study the [Wisdom of Asking Questions](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md), which can better help you to solve problems and save time. Questions such as "Why doesn't it work?" , "Can you help me then?" No one should know about such questions.
 
-## 更新日志
+## Changelog
 
-**全新版本即将来袭，敬请期待...**
+**A brand new version is coming soon, stay tuned...**
 
-更新推送：[Aria2 Channel](https://t.me/Aria2_Channel)
+Update Push: [Aria2 Channel](https://t.me/Aria2_Channel)
 
-### 2020-06-27 | V2 终极版
+### 2020-06-27 | V2 Ultimate
 
-配置文件(`aria2.conf`)：
-- 优化选项参数，提升下载速度与使用体验
-- 优化排版格式及注释说明，提升阅读体验
+Configuration file (`aria2.conf`).
+- Optimize option parameters to improve download speed and usage experience
+- Optimize the layout format and comments to improve the reading experience
 
-附加功能脚本：
-- `delete.aria2.sh`更名为`clean.sh`
-- `autoupload.sh`更名为`upload.sh`
-- 细节改进，提升使用体验
+Additional function scripts.
+- `delete.aria2.sh` renamed to `clean.sh`
+- renamed `autoupload.sh` to `upload.sh`
+- Detailed improvements to improve the experience
 
 <details>
-<summary>历史记录</summary>
+<summary>History</summary>
 
 ### 2020-06-08
 
-配置文件(`aria2.conf`)：
-- 默认关闭文件预分配(`file-allocation=none`)，最大化文件系统兼容性。
-- 其它细节改进
+Configuration file (`aria2.conf`).
+- Turn off file preallocation by default (`file-allocation=none`) to maximize filesystem compatibility.
+- Other detail improvements
 
-其它：
-- 更新 DHT 文件
+Other.
+- Update DHT files
 
 ### 2020-05-03
 
-配置文件(`aria2.conf`)：
-- 优化 部分设置选项与注释说明。
-- 增加 非官方增强选项。仅适用于 [myfreeer/aria2-build-msys2](https://github.com/myfreeer/aria2-build-msys2) 和 [P3TERX/aria2-builder](https://github.com/P3TERX/aria2-builder) 项目所构建的版本。
+Configuration file (`aria2.conf`).
+- Optimize some setting options with comment descriptions.
+- Add unofficial enhancement options. Only available for projects built by [myfreeer/aria2-build-msys2](https://github.com/myfreeer/aria2-build-msys2) and [P3TERX/aria2-builder](https://github.com/P3TERX/ aria2-builder) built by the project.
 
 ### 2020-04-16
 
-- 新增 文件移动脚本(`move.sh`)，将下载完成的文件移动到指定目录。与自动上传脚本类似，对于 BT 多文件可完整保留目录结构。
+- Added file move script (`move.sh`) to move downloaded files to the specified directory. Similar to the auto-upload script, the directory structure can be preserved intact for BT multiple files.
 
 ### 2020-04-12
 
-- 重构 BT tracker 列表更新脚本(`tracker.sh`) ，增加通过 RPC 方式更新 BT tracker 的功能，无需重启 Aria2 即可生效。
+- Refactor the BT tracker list update script (`tracker.sh`) to add the ability to update the BT tracker via RPC, without restarting Aria2.
 
 ### 2020-03-11
 
-配置文件(`aria2.conf`)：
-- 新增 日志设置。默认设置日志级别为`warn`，仅输出警告和错误，可大幅减少日志产生并有利于排错。
+Configuration file (`aria2.conf`).
+- Added Logging settings. The default log level is `warn`, which only outputs warnings and errors, significantly reducing log generation and facilitating troubleshooting.
 
 ### 2020-02-18
 
-> **TIPS:** 本次更新重构了所有附加功能脚本。使用 [Aria2 一键安装管理脚本](https://github.com/P3TERX/aria2.sh) 的小伙伴请卸载后升级到最新脚本部署。使用 [Aria2 Pro](https://github.com/P3TERX/docker-aria2-pro)  Docker 镜像的小伙伴请删除配置文件目录后拉取最新镜像进行部署。
+> **TIPS:** This update refactors all additional function scripts. For those who use the [Aria2 one-click installation management script](https://github.com/P3TERX/aria2.sh), please uninstall and upgrade to the latest script deployment. For those who use the [Aria2 Pro](https://github.com/P3TERX/docker-aria2-pro) Docker image, please delete the configuration file directory and then pull the latest image for deployment.
 
-RCLONE 自动上传脚本（`autoupload.sh`） ：
-- 文件过滤功能强势回归，文件大小过滤、文件类型过滤，功能更强大。
-- 新增 RCLONE 高级设置：自定义配置文件路径、配置文件解密、并行上传数等功能。
-- 增强上传失败重试机制。
+RCLONE auto-upload script (`autoupload.sh`):
+- The file filtering function has returned strongly, with more powerful functions for file size filtering and file type filtering.
+- Added RCLONE advanced settings: custom configuration file path, configuration file decryption, number of parallel uploads and other functions.
+- Enhanced upload failure retry mechanism.
 
-其它：
-- 优化自动删除脚本（`delete.sh`、`delete.aria2.sh`）判断逻辑。
-- 移除配置文件(`aria2.conf`)过时配置项
-- 更新 DHT 文件
+other:
+- Optimize the judgment logic of automatic deletion scripts (`delete.sh`, `delete.aria2.sh`).
+- Removed outdated configuration items in configuration file (`aria2.conf`)
+- Update DHT files
 
 ### 2020-02-05
 
-配置文件(`aria2.conf`)：
-- 更新客户端伪装设置
-- 默认开启强制加密（防版权投诉、迅雷吸血）
+Configuration file (`aria2.conf`):
+- Update client masquerading settings
+- Forced encryption is enabled by default (anti-copyright complaint, Thunder blood-sucking)
 
 ### 2020-01-22
 
-配置文件(`aria2.conf`)：
-- 默认关闭 IPv6 相关功能，防止不支持 IPv6 的情况下导致的 DHT 功能异常。
-- 更新客户端伪装设置，理论上可更好的支持 PT 下载。
-- 新增 BT 加密设置，理论上可防版权投诉、迅雷吸血。
+Configuration file (`aria2.conf`):
+- By default, IPv6-related functions are disabled to prevent abnormal DHT functions caused by not supporting IPv6.
+- Update client camouflage settings to better support PT download in theory.
+- Added BT encryption settings, which theoretically can prevent copyright complaints and Thunder blood-sucking.
 
 ### 2020-01-15
 
-- 调整脚本注释与格式。
-- 优化`delete.sh`判断逻辑，防止不正确的使用方式（路径不一致）导致的文件被删除。
+- Adjusted script comments and formatting.
+- Optimize the `delete.sh` judgment logic to prevent files from being deleted due to incorrect usage (inconsistent paths).
 
 ### 2019-11-28
 
-配置文件(`aria2.conf`)：
+Configuration file (`aria2.conf`):
 
-- 优化配置参数
+- Optimize configuration parameters
 
-其它文件：
+Other documents:
 
-- 更新 DHT 文件
+- Update DHT files
 
 ### 2019-11-25
 
-附加功能脚本：
+Additional function script:
 
-- 修改 Trackers 来源([XIU2/TrackersListCollection](https://github.com/XIU2/TrackersListCollection))
+- Modify Trackers source ([XIU2/TrackersListCollection](https://github.com/XIU2/TrackersListCollection))
 
 ### 2019-10-23
 
-附加功能脚本：
+Additional function script:
 
-- 新增 BT tracker 获取脚本
+- Added BT tracker acquisition script
 
 ### 2019-10-21
 
-配置文件(`aria2.conf`)：
+Configuration file (`aria2.conf`):
 
-- 优化配置参数
-- 解决已完成的任务在重启后重复下载的 bug
-- ~~新增 重启后已完成的任务消失的 bug（雾~~
+- Optimize configuration parameters
+- Solved the bug of repeated download of completed tasks after restarting
+- ~~Added a bug where completed tasks disappear after restarting (fog~~
 
-附加功能脚本：
+Additional function script:
 
-- 修复 `autoupload.sh` 因 Rlone 上传后剩余空目录导致**上传失败重试功能**误判的 bug
-- 改善 `delete.sh`、`delete.aria2.sh` 路径判断逻辑，增加删除空目录功能。
+- Fixed a bug in `autoupload.sh` that caused **upload failure retry function** misjudgment due to the remaining empty directory after Rlone upload
+- Improve the path judgment logic of `delete.sh` and `delete.aria2.sh`, and add the function of deleting empty directories.
 
 ### 2019-10-10
 
-附加功能脚本（`autoupload.sh`）：
+Additional function script (`autoupload.sh`):
 
-- 增加 上传失败重试功能
+- Add upload failure retry function
 
 ### 2019-06-08
 
-附加功能脚本（`autoupload.sh`）：
+Additional function script (`autoupload.sh`):
 
-* 优化 路径判断逻辑
-* 修复 BT下载文件夹下所有文件时路径无法判断的 bug
+* Optimized path judgment logic
+* Fix the bug that the path cannot be determined when all files under the BT download folder are downloaded
 
 ### 2019-05-23
 
-附加功能脚本（`autoupload.sh`）：
+Additional function script (`autoupload.sh`):
 
-* 移除上传大小限制
-* 优化路径判断逻辑
-* 调整脚本触发日志
+* Remove upload size limit
+* Optimized path judgment logic
+* Adjust script trigger log
 
 ### 2019-02-13
 
-配置文件：
+Configuration file:
 
-* 优化 配置参数
+* Optimize configuration parameters
 
 ### 2019-01-31
 
-配置文件：
+Configuration file:
 
-* 调整 注释说明
+* Adjustment Notes
 
-其他文件：
+Other files:
 
-* 更新 DHT（IPv4）文件
+* Update DHT (IPv4) files
 
 ### 2019-01-14
 
-附加功能脚本：
+Additional function script:
 
-* 修复 `autoupload.sh` 在某些情况下上传整个 `root` 目录的 bug
-* 优化 `autoupload.sh` 在日志中输出上传文件路径
+* Fixed `autoupload.sh` uploading the entire `root` directory bug in some cases
+* Optimize `autoupload.sh` to output upload file path in log
 
 ### 2019-01-09
 
-附加功能脚本：
+Additional function script:
 
-* 修复 `autoupload.sh` 在某些情况下文件上传位置不正确的 bug
-* 修复 `delete.sh` 在某些情况下不删除文件的 bug
-* 其他优化调整
-* ~~增加  `autoupload.sh` 在某些情况下上传整个 `root` 目录的 bug~~
+* Fix `autoupload.sh` bug where file upload location is incorrect in some cases
+* Fix `delete.sh` bug not deleting files in some cases
+* Other optimization adjustments
+* ~~Add a bug where `autoupload.sh` uploads the entire `root` directory in some cases~~
 
 ### 2018-12-25
 
-配置文件：
+Configuration file:
 
-* 调整 下载暂停时运行`info.sh`，默认不启用
+* Adjusted to run `info.sh` when the download is paused, not enabled by default
 
-附加功能脚本：
+Additional function script:
 
-* 优化 `autoupload.sh` 自动上传脚本使用体验，脚本触发时会在日志中输出高能提醒，防止萌新一脸懵逼
-* 增加 `info.sh` 下载任务信息显示脚本
-* 移除 `test.sh` 测试脚本
+* Optimize the experience of using `autoupload.sh` to automatically upload scripts. When the script is triggered, a high-energy reminder will be output in the log to prevent Mengxin from being confused
+* Added `info.sh` download task information display script
+* Remove `test.sh` test script
 
 ### 2018-12-22
 
-配置文件：
+Configuration file:
 
-* 调整 期望下载速度参数
+* Adjust the expected download speed parameters
 
-附加功能脚本：
+Additional function script:
 
-* 修复 下载文件夹时复杂情况出现的 bug
-* 优化 下载文件夹时的判断条件
+* Fixed a bug with complications when downloading folders
+* Optimize the judgment conditions when downloading folders
 
 ### 2018-12-11
 
-附加功能脚本：
+Additional function script:
 
-* 修复 BT下载多级目录时上传不完整和其它 bug
+* Fix incomplete upload and other bugs when BT downloads multi-level directories
 
 ### 2018-12-07
 
-* 添加 DHT（IPv4）文件
-* 调整配置文件
-* 整合到 [Aria2 一键安装管理脚本](https://github.com/P3TERX/aria2.sh)
+* Add DHT (IPv4) file
+* Adjust the configuration file
+* Integrated into [Aria2 one-click installation management script](https://github.com/P3TERX/aria2.sh)
 
 ### 2018-11-10
 
-* 首次提交
+* first submission
 
 </details>
 
-## 声明
+## declaration
 
-本项目使用 [MIT](https://github.com/P3TERX/aria2.conf/blob/master/LICENSE) 开源协议，对于本项复制、修改、发布等行为请遵守相关协议保留所有文件中的版权信息，谢谢合作！
+This project uses the [MIT](https://github.com/P3TERX/aria2.conf/blob/master/LICENSE) open source agreement. Please abide by the relevant agreement for copying, modifying, publishing, etc. to retain the copyright in all files. thank you for your cooperation!
