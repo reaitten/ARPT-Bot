@@ -6,7 +6,9 @@
 
 [![GitHub Stars](https://img.shields.io/github/stars/666wcy/ARPT-Bot.svg?color=inactived&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/linuxserver/docker-qbittorrent) [![Docker Pulls](https://img.shields.io/docker/pulls/benchao/arpt.svg?color=inactived&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/repository/docker/benchao/arpt) [![GitHub Release](https://img.shields.io/docker/v/benchao/arpt?color=inactived&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=最新版本&logo=docker)](https://github.com/linuxserver/docker-qbittorrent/releases)
 
-# Changelog
+# ARPT-Bot
+
+## Changelog
 
 v2.0.9 (current)
 
