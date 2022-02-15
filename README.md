@@ -21,7 +21,7 @@ Mapping `rclone rc`, support for customizing the operation of `rclone rc`, the s
 ***
 Automatic update is supported after this version, Python file changes can be updated by simply rebooting, other hard updates will only update the version via Docker
 
-Fix conflict between tasks added by aria2 panel and configuration of `conf` file causing local files to be deleted [#18](https://github.com/666wcy/ARPT-Bot/issues/18)[#16](https://github.com/666wcy/ARPT-Bot/) issues/16)
+Fix conflict between tasks added by aria2 panel and configuration of `conf` file causing local files to be deleted [#18](https://github.com/666wcy/ARPT-Bot/issues/18) [#16](https://github.com/666wcy/ARPT-Bot/) issues/16)
 
 Fix odprivate command failure (conflict with subsequent command causes failure) [#17](https://github.com/666wcy/ARPT-Bot/issues/17)
 
@@ -29,7 +29,7 @@ Fix the default panel account password as default, which is a security risk, cha
 
 <details>
 
-<summary>Previous changelog</summary>
+<summary>Previous changelogs</summary>
 
 v2.0.8
 
@@ -265,7 +265,7 @@ docker run -d \
     -e Telegram_user_id=xxx \
     -e Upload=xxx \
     -e Rclone_share=False \
-    -e Error_user_info="你没有使用权限" \
+    -e Error_user_info="You do not have permission to use" \
     -p 8868:8868 \
    benchao/arpt:v2.0.8
 
@@ -274,21 +274,16 @@ docker run -d \
 Configuration explanation
 
 ```
-Api_hash Api_id 这两项在https://my.telegram.org中注册应用后得到
+Api_hash & Api_id: These two items are obtained after registering the application in https://my.telegram.org
+Aria2_secret: the secret key of Aria2
+Telegram_bot_api: the API/Token of your Bot, obtained by applying at @BotFather
+Telegram_user_id: TG id of the user, available at @userinfobot, set as group id and all people in the group will be available, need to set group permissions for Bot
+Remote: Upload the destination rclone drive letter
+Upload: Uploads the folder name without adding / to it
 
-Aria2_secret    Aria2的密匙
+Rclone_share can be left unfilled, True is to return the sharing link (onedrive) after uploading the network disk, False is to turn off the function, if this variable is not set, it will be turned off by default.
 
-Telegram_bot_api    Bot的API，在@BotFather申请获得
-
-Telegram_user_id    使用者的TG id，可在@userinfobot处获得，设置为群组ID则该群组所有人员可用，需要设置Bot的群组权限
-
-Remote  上传目的地的rclone盘符
-
-Upload  上传文件夹名称，后面不需要加/
-
-Rclone_share 可不填，True 为上传网盘后返回分享链接(onedrive)，False 为关闭该功能，不设置该变量则默认关闭
-
-Error_user_info 可不填，可设置非允许使用者发送消息时的提示，不设置该变量则使用默认语句
+Error_user_info can be left unfilled to set the prompt when a non-permitted user sends a message, or use the default statement if this variable is not set.
 
 ```
 
